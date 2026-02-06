@@ -127,8 +127,33 @@ namespace Hospital_Management.Controllers
                 else
                 {
                     // EDIT
+                    var existingPatient = _dbContext.PatientDetails
+                                                .FirstOrDefault(p => p.PatientId == patient.PatientId);
+                    if (existingPatient == null)
+                    {
+                        // Patient not found for editing
+                        return NotFound(new
+                        {
+                            success = false,
+                            message = "Patient not found for editing"
+                        });
+                    }
+                    existingPatient.Name = patient.Name;
+                    existingPatient.DateOfBirth = patient.DateOfBirth;
+                    existingPatient.Address = patient.Address;
+                    existingPatient.Allergies = patient.Allergies;
+                    existingPatient.ExistingConditions = patient.ExistingConditions;
+                    existingPatient.Gender = patient.Gender;
+                    existingPatient.Nationality = patient.Nationality;
+                    existingPatient.City = patient.City;
+                    existingPatient.PhoneNumber = patient.PhoneNumber;
+                    existingPatient.Email = patient.Email;
+                    existingPatient.bloodGroup = patient.bloodGroup;
+                    existingPatient.VisitDate = patient.VisitDate;
+
+
                     //Modify existing patient record
-                    _dbContext.Entry(patient).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    _dbContext.Entry(existingPatient).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     
                 }
                 // Save changes to the database
@@ -146,7 +171,7 @@ namespace Hospital_Management.Controllers
                 {
                     success = false,
                     message = ex.InnerException?.Message ?? ex.Message,
-                    stack = ex.InnerException?.StackTrace
+                    
                 });
             }
         }
