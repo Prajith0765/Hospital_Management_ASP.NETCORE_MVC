@@ -112,8 +112,7 @@ function SavePatient() {
     $.ajax({
         url: '/Admin/CreatePatient',
         type: 'POST',
-        data: JSON.stringify(patientData),
-        contentType: 'application/json; charset=utf-8',
+        data: patientData,
         // On success, check the response and redirect or show an alert based on the success status
         success: function (response) {
             if (response.success) {

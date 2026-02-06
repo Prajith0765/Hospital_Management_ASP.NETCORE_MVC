@@ -37,8 +37,8 @@ function SaveLogin() {
     $.ajax({
         url: '/User_Authentication/Login',
         type: 'POST',
-        contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify(loginData),
+
+        data: loginData,
         // On successful login, redirect the user to the home page
         success: function (response) {
             // Cookie already created on server

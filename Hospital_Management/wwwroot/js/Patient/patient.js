@@ -136,35 +136,43 @@ function renderPagination() {
     `);
 }
 
-
+// Handle page change when a pagination button is clicked
 function changePage(page) {
+    // Calculate the total number of pages to validate the requested page number
     let totalPages = Math.ceil(allPatients.length / pageSize);
-
+    // Validate the requested page number to ensure it is within the valid range
     if (page < 1 || page > totalPages) return;
-
+    // Update the current page and re-render the patient data and pagination controls
     currentPage = page;
+    // Render the patient data for the new current page
     renderPage();
+    // Re-render the pagination controls to reflect the new current page
     renderPagination();
 }
 
-
+// Utility function to format date in a readable format (e.g., "dd/mm/yyyy")
 function formatDate(date) {
+    // Check if the date is valid before formatting
     if (!date) return '';
+    // Use toLocaleDateString to format the date in "en-GB" locale for "dd/mm/yyyy" format
     return new Date(date).toLocaleDateString('en-GB');
 }
-
-
+// Handle patient deletion with confirmation and AJAX request
 function deletePatient(id) {
-    if (userRole === "Doctor") {
+    // Check user role before allowing deletion
+    // Redirect to AccessDenied if NOT Admin
+    if (userRole !== "Admin") {
         window.location.href = '/User_Authentication/AccessDenied';
         return;
     }
+    // Show a confirmation dialog before proceeding with deletion
     if (!confirm("Are you sure you want to delete this patient?")) return;
-
+    // Make an AJAX POST request to delete the patient record on the server
     $.ajax({
         url: '/Admin/DeletePatient',
         type: 'POST',
         data: { id: id },
+        // On success, check the response and refresh the patient data if deletion was successful, or show an alert with the error message
         success: function (res) {
             if (res.success) {
                 loadPatients(); // refresh table
@@ -172,6 +180,7 @@ function deletePatient(id) {
                 alert(res.message);
             }
         },
+        // On error, display an alert indicating that the deletion failed, and redirect to AccessDenied if the error status is 403 (Forbidden)
         error: function (xhr) {
             alert('Delete failed');
             if (xhr.status === 403) {

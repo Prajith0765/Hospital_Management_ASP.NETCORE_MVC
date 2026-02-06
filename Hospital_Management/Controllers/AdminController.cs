@@ -20,45 +20,40 @@ namespace Hospital_Management.Controllers
         }
 
 
-
-        //public IActionResult Details()
-        //{
-        //    var patients = _dbContext.PatientDetails.ToList();
-        //    return View(patients);
-        //}
-
-        // Get Patient Details
-
-        
-
-
-
         //Get CreatePatient and Edit Patient Load Existing Data
         [HttpGet]
         public IActionResult CreatePatient(int? id)
         {
-            // ADD NEW PATIENT
-            if (id == null || id == 0)
+            try
             {
-                // ADD
-                // Return an empty PatientDetails model to the view for adding a new patient
-                return View(new PatientDetails());
-            }
+                // ADD NEW PATIENT
+                if (id == null || id == 0)
+                {
+                    // ADD
+                    // Return an empty PatientDetails model to the view for adding a new patient
+                    return View(new PatientDetails());
+                }
 
-            // EDIT
-            // Fetch existing patient details from the database for editing
-            var patient = _dbContext.PatientDetails
-                                    .FirstOrDefault(p => p.PatientId == id);
-            // If patient not found, return 404
-            if (patient == null)
-                return NotFound();
-            // Return the existing patient details to the view for editing
-            return View(patient);
+                // EDIT
+                // Fetch existing patient details from the database for editing
+                var patient = _dbContext.PatientDetails
+                                        .FirstOrDefault(p => p.PatientId == id);
+                // If patient not found, return 404
+                if (patient == null)
+                    return NotFound();
+                // Return the existing patient details to the view for editing
+                return View(patient);
+            }
+            catch (Exception)
+            {
+                // Handle exceptions and return a bad request response
+                return BadRequest();
+            }
         }
 
         //Post CreatePatient
         [HttpPost]
-        public IActionResult CreatePatient([FromBody] PatientDetails patient)
+        public IActionResult CreatePatient(PatientDetails patient)
         {
             try
             {
@@ -96,6 +91,7 @@ namespace Hospital_Management.Controllers
                             message = "Patient not found for editing"
                         });
                     }
+                    // Update the existing patient record with the new values
                     existingPatient.Name = patient.Name;
                     existingPatient.DateOfBirth = patient.DateOfBirth;
                     existingPatient.Address = patient.Address;
