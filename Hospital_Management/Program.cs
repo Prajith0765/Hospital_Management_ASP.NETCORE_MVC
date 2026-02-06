@@ -54,7 +54,6 @@ app.MapStaticAssets();
 //  Enable Authentication
 app.UseAuthentication();
 
-
 //  Enable Authorization
 app.UseAuthorization();
 
