@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="/css/Login/images/logos/favicon.png" type="">
+
+    <title> Medicare </title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="/css/Layout/css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!--owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+    <!-- font awesome style -->
+    <link href="/css/Layout/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="/css/Layout/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="/css/Layout/css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <!-- ================= NAVBAR ================= -->
+    <header class="header_section">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg custom_nav-container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <span>MediCare</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent">
+                    <span></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="User_Authentication" asp-action="Logout">Logout</a>
+                        </li>
+                        @* <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Departments">Departments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Doctors">Doctors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
+                        </li> *@
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer_section">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 footer_col">
+                    <h4>Reach at</h4>
+                    <p><i class="fa fa-map-marker"></i> Location</p>
+                    <p><i class="fa fa-phone"></i> +01 1234567890</p>
+                    <p><i class="fa fa-envelope"></i> demo@gmail.com</p>
+                </div>
+
+                <div class="col-md-4 footer_col">
+                    <h4>About</h4>
+                    <p>Hospital management system template</p>
+                </div>
+
+             
+            </div>
+
+            <div class="footer-info text-center mt-3">
+                <p>&copy; @DateTime.Now.Year Medicare. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+        <!-- footer section -->
+        <!-- jQery -->
+        <script type="text/javascript" src="/js/Layout/js/jquery-3.4.1.min.js"></script>
+        <!-- popper js -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <!-- bootstrap js -->
+        <script type="text/javascript" src="/js/Layout/js/bootstrap.js"></script>
+        <!-- owl slider -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+        </script>
+        <!-- custom js -->
+        <script type="text/javascript" src="/js/Layout/js/custom.js"></script>
+        <!-- Google Map -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+        </script>
+        <!-- End Google Map -->
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

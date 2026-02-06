@@ -1,0 +1,143 @@
+﻿@model Hospital_Management.Models.PatientDetails
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medicare</title>
+
+    <link rel="stylesheet" href="/css/Login/css/styles.min.css" />
+</head>
+<body>
+
+    <div class="container-fluid py-4">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-7 col-md-9 col-sm-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+
+                        <h5 class="text-center mb-4">Patient Registration</h5>
+
+                        <form id="patientForm">
+
+                            <!-- IMPORTANT -->
+                            <input asp-for="PatientId" type="hidden" />
+
+                            <div class="mb-3">
+                                <label>Full Name</label>
+                                <input asp-for="Name" class="form-control" />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>Date of Birth</label>
+                                    <input asp-for="DateOfBirth" type="date" class="form-control" />
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Gender</label>
+                                    <select asp-for="Gender" class="form-select">
+                                        <option value="">-- Select --</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>Blood Group</label>
+                                    <select asp-for="bloodGroup" class="form-select">
+                                        <option value="">-- Select --</option>
+                                        <option>A+</option>
+                                        <option>A-</option>
+                                        <option>B+</option>
+                                        <option>B-</option>
+                                        <option>AB+</option>
+                                        <option>AB-</option>
+                                        <option>O+</option>
+                                        <option>O-</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Phone Number</label>
+                                    <input asp-for="PhoneNumber" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Email</label>
+                                <input asp-for="Email" class="form-control" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Address</label>
+                                <textarea asp-for="Address" class="form-control"></textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>City</label>
+                                    <input asp-for="City" class="form-control" />
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Nationality</label>
+                                    <input asp-for="Nationality" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Existing Conditions</label>
+                                <textarea asp-for="ExistingConditions" class="form-control"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Allergies</label>
+                                <textarea asp-for="Allergies" class="form-control"></textarea>
+                            </div>
+
+                            <div class="mb-4">
+                                <label>Visit Date</label>
+                                <input asp-for="VisitDate" type="date" class="form-control" />
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="button"
+                                        class="btn btn-primary w-50"
+                                        onclick="InitPatient()">
+                                    @(Model.PatientId == 0 ? "Create" : "Update")
+                                </button>
+
+                                <a asp-controller="Admin"
+                                   asp-action="Details"
+                                   class="btn btn-outline-secondary w-50">
+                                    Cancel
+                                </a>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/Login/libs/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
+
+
+   
+    <script src="/js/Patient/script.js"></script>
+
+</body>
+</html>

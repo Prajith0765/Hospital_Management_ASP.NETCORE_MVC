@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container mt-4">
+
+    <!-- PAGE HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Patient Details</h2>
+            <p class="text-muted mb-0">List of registered patients</p>
+        </div>
+
+        <a asp-action="CreatePatient"
+           asp-controller="Admin"
+           class="btn btn-success">
+            + Add Patient
+        </a>
+    </div>
+
+    <!-- PATIENT TABLE -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Index</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>DOB</th>
+                    <th>Gender</th>
+                    <th>Nationality</th>
+                    <th>City</th>
+                    <th>Phone</th>
+                    <th>Blood Group</th>
+                    <th>Visit Date</th>
+                    <th style="width: 180px;">Actions</th>
+                </tr>
+            </thead>
+
+            <!-- DATA COMES FROM JS -->
+            <tbody id="patientTableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3">
+        <nav>
+            <ul class="pagination" id="pagination"></ul>
+        </nav>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="/js/Patient/patient.js"></script>
+}
