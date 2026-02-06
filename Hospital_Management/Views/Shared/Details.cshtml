@@ -10,12 +10,14 @@
             <h2>Patient Details</h2>
             <p class="text-muted mb-0">List of registered patients</p>
         </div>
-
+        @if (User.IsInRole("Admin"))
+        {
         <a asp-action="CreatePatient"
            asp-controller="Admin"
            class="btn btn-success">
             + Add Patient
         </a>
+        }
     </div>
 
     <!-- PATIENT TABLE -->
@@ -53,4 +55,9 @@
 
 @section Scripts {
     <script src="/js/Patient/patient.js"></script>
+
+    <script>
+        const userRole = '@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value';
+    </script>
+
 }

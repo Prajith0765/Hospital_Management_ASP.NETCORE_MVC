@@ -20,7 +20,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         //  Redirect to logout page on sign out
         options.LogoutPath = "/User_Authentication/Logout";
         //  Redirect to login page if access is denied
-        options.AccessDeniedPath = "/User_Authentication/Login";
+        options.AccessDeniedPath = "/User_Authentication/AccessDenied";
         //  Set cookie expiration time and sliding expiration
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
         //  Enable sliding expiration to refresh the cookie on each request

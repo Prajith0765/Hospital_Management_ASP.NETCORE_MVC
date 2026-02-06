@@ -24,45 +24,10 @@ namespace Hospital_Management.Controllers
         // This action method returns the login view where users can enter their credentials.
         public IActionResult Login()
         {
-            return View("Admin_Login");
+            return View();
         }
         //Mapping the incoming JSON to Logins model by using
         //[FromBody] which is used to bind the request body to a model.
-        //[HttpPost]
-        //public IActionResult Login([FromBody] Logins loginData)
-        //{
-        //    try
-        //    {
-        //        if (loginData == null)
-        //            return BadRequest("Invalid data");
-
-        //        // Fetch user from DB
-        //        var user = _dbContext.Logins
-        //                           .FirstOrDefault(u => u.Username == loginData.Username);
-
-        //        if (user != null)
-        //        {
-        //            // Plain password comparison
-        //            if (user.Password != loginData.Password)
-        //                return Unauthorized("Invalid username or password");
-
-        //            // Login success
-        //            return Ok(new
-        //            {
-        //                success = true,
-        //            });
-        //        }
-        //        else
-        //        {
-        //            return Unauthorized("Invalid username or password");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Log exception if needed
-        //        return StatusCode(500, "Server error occurred");
-        //    }
-        //}
 
 
         // POST: /User_Authentication/Login
@@ -122,6 +87,13 @@ namespace Hospital_Management.Controllers
 
             // Redirect to Login page
             return RedirectToAction("Login", "User_Authentication");
+        }
+
+        // GET: /User_Authentication/AccessDenied
+        // This action method returns the Access Denied view when a user tries to access a resource they are not authorized for.
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
     }

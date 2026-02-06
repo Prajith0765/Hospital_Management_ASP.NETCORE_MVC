@@ -8,7 +8,7 @@ namespace Hospital_Management.Controllers
 {
     // This controller manages administrative functions related to patient details.
     // The [Authorize] attribute ensures that only authenticated users can access its actions.
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         // Dependency injection of the AppDbContext to access the database.
@@ -29,49 +29,7 @@ namespace Hospital_Management.Controllers
 
         // Get Patient Details
 
-        [HttpGet]
-        public IActionResult Details()
-        {
-            return View();
-        }
-
-        //Get Patient List
-
-        [HttpGet]
-        public IActionResult GetPatients()
-        {
-            // Fetch non-deleted patient records from the database
-            try
-            {
-                // LINQ query to select specific fields from non-deleted patients
-                var patients = _dbContext.PatientDetails
-                    .Where(p => !p.IsDeleted)
-                    .Select(p => new
-                    {
-                        p.PatientId,
-                        p.Name,
-                        p.DateOfBirth,
-                        p.Gender,
-                        p.Nationality,
-                        p.City,
-                        p.PhoneNumber,
-                        p.bloodGroup,
-                        p.VisitDate
-                    })
-                    .ToList();
-                // Return the patient list as JSON
-                return Json(patients);
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions and return a bad request response
-                return BadRequest(new
-                {
-                    success = false,
-                    message = ex.Message
-                });
-            }
-        }
+        
 
 
 

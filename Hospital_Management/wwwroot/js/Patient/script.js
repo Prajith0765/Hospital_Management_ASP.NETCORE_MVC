@@ -108,7 +108,7 @@ function SavePatient() {
 
         success: function (response) {
             if (response.success) {
-                window.location.href = '/Admin/Details';
+                window.location.href = '/Patient/Details';
             } else {
                 alert(response.message);
             }

@@ -9,7 +9,7 @@ const pageSize = 5;
 
 function loadPatients() {
     $.ajax({
-        url: '/Admin/GetPatients',
+        url: '/Patient/GetPatients',
         type: 'GET',
         success: function (data) {
             allPatients = data;
@@ -122,6 +122,10 @@ function formatDate(date) {
 
 
 function deletePatient(id) {
+    if (userRole === "Doctor") {
+        window.location.href = '/User_Authentication/AccessDenied';
+        return;
+    }
     if (!confirm("Are you sure you want to delete this patient?")) return;
 
     $.ajax({
@@ -135,8 +139,11 @@ function deletePatient(id) {
                 alert(res.message);
             }
         },
-        error: function () {
+        error: function (xhr) {
             alert('Delete failed');
+            if (xhr.status === 403) {
+                window.location.href = '/User_Authentication/AccessDenied';
+            }
         }
     });
 }
