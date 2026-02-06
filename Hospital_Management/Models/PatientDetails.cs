@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hospital_Management.Models
 {
+    // This class represents the details of a patient in the hospital management system.
+    // It includes properties for storing patient information 
     public class PatientDetails
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -1,7 +1,10 @@
 ﻿using Hospital_Management.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
-
+// The Program class is the entry point of the ASP.NET Core application.
+// It configures services and the HTTP request pipeline.
+// The WebApplication.CreateBuilder method initializes a new instance of the WebApplicationBuilder class,
+// which is used to configure the application.
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //  AUTHENTICATION (COOKIE)
+//  Add authentication services to the container and configure cookie-based authentication.
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -32,35 +36,42 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 //  AUTHORIZATION
+//  Add authorization services to the container.
+//  This allows you to use the [Authorize] attribute in your controllers and actions to restrict access based on user roles or policies.
 builder.Services.AddAuthorization();
 
-
+//  Build the application.
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+//  If the application is not in development mode,
+//  use the exception handler and HSTS middleware for better error handling and security.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+//  Redirect HTTP requests to HTTPS for secure communication.
 app.UseHttpsRedirection();
+//Routing middleware is responsible for matching incoming HTTP requests to the appropriate route handlers (controllers and actions) based on the URL and HTTP method.
+//It processes the request and determines which controller action should handle it.
 app.UseRouting();
 
 //app.UseAuthorization();
-
+//  Serve static files (like CSS, JavaScript, images) from the wwwroot folder.
 app.MapStaticAssets();
 //  Enable Authentication
 app.UseAuthentication();
 
 //  Enable Authorization
 app.UseAuthorization();
-
+//  Define the default route for the application.
+//  This route pattern specifies that if no controller or action is specified in the URL,
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=User_Authentication}/{action=Login}/{id?}")
     .WithStaticAssets();
 
-
+//  Run the application.
 app.Run();

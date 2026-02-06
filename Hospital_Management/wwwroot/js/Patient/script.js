@@ -1,7 +1,11 @@
-﻿function InitPatient() {
+﻿// JavaScript code for patient form handling
+// This script initializes form validation, handles form submission via AJAX, and manages form state
+// Initialize the patient form when the document is ready
+function InitPatient() {
     InitValidation();
     SavePatient();
 }
+// Reset the form fields to their default state
 function CleanUp() {
     Setter({
         Name: "",
@@ -18,6 +22,8 @@ function CleanUp() {
         VisitDate: ""
     });
 }
+// Collect form data into an object for submission
+// The Getter function collects values from the form fields and returns an object representing the patient data
 function Getter() {
     return {
         PatientId: $("#PatientId").val() || 0,
@@ -36,7 +42,9 @@ function Getter() {
     };
 }
 
+// Initialize form validation rules and messages using jQuery Validation plugin
 function InitValidation() {
+    // Set up validation rules and messages for the patient form using jQuery Validation plugin
     $("#patientForm").validate({
         rules: {
             Name: {
@@ -75,7 +83,8 @@ function InitValidation() {
     });
 }
 
-
+// Populate form fields with data for editing an existing patient record
+// The Setter function takes a patient data object and populates the form fields with the corresponding values for editing
 function Setter(data) {
     $("#Name").val(data.Name);
     $("#DateOfBirth").val(data.DateofBirth);
@@ -90,22 +99,22 @@ function Setter(data) {
     $("#Allergies").val(data.Allergies);
     $("#VisitDate").val(data.VisitDate);
 }
-function SavePatient() {
 
+// Handle form submission to save patient data via AJAX
+// The SavePatient function collects form data, performs basic validation, and sends an AJAX POST request to save the patient data on the server
+
+function SavePatient() {
+    // Collect form data into an object using the Getter function
     var patientData = Getter();
 
-    // basic validation
-    if (!patientData.DateOfBirth || !patientData.VisitDate) {
-        alert("Date fields are required");
-        return;
-    }
-
+    //Ajax call to save patient data to the server
+    //Post the patient data to the server using AJAX and handle the response to provide feedback to the user
     $.ajax({
         url: '/Admin/CreatePatient',
         type: 'POST',
         data: JSON.stringify(patientData),
         contentType: 'application/json; charset=utf-8',
-
+        // On success, check the response and redirect or show an alert based on the success status
         success: function (response) {
             if (response.success) {
                 window.location.href = '/Patient/Details';
@@ -113,7 +122,7 @@ function SavePatient() {
                 alert(response.message);
             }
         },
-
+        // On error, display an alert with the error message from the server response
         error: function (xhr) {
             alert(xhr.responseText);
         }

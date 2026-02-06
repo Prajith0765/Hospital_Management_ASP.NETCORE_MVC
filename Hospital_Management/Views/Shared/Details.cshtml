@@ -10,6 +10,7 @@
             <h2>Patient Details</h2>
             <p class="text-muted mb-0">List of registered patients</p>
         </div>
+        <!--Authorized Access-->
         @if (User.IsInRole("Admin"))
         {
         <a asp-action="CreatePatient"
@@ -44,9 +45,10 @@
             </tbody>
         </table>
     </div>
-
+    <!--Pagination-->
     <div class="d-flex justify-content-center mt-3">
         <nav>
+            
             <ul class="pagination" id="pagination"></ul>
         </nav>
     </div>
@@ -55,7 +57,7 @@
 
 @section Scripts {
     <script src="/js/Patient/patient.js"></script>
-
+    <!--Pass the Role of User Login to the Js-->
     <script>
         const userRole = '@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value';
     </script>
