@@ -118,12 +118,21 @@ function SavePatient() {
             if (response.success) {
                 window.location.href = '/Patient/Details';
             } else {
-                alert(response.message);
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed',
+                    text: response.message
+                });
             }
         },
         // On error, display an alert with the error message from the server response
         error: function (xhr) {
-            alert(xhr.responseText);
+            Swal.fire({
+                icon: 'error',
+                title: 'Server Error',
+                text: xhr.responseText
+            });
         }
     });
 }
