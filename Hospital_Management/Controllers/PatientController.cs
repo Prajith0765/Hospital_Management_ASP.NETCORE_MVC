@@ -23,7 +23,7 @@ namespace Hospital_Management.Controllers
         [HttpGet]
         public IActionResult Details()
         {
-            return View();
+            return View("~/Views/Data/Details.cshtml");
         }
 
         //Get Patient List
@@ -50,7 +50,7 @@ namespace Hospital_Management.Controllers
                         p.bloodGroup,
                         p.VisitDate
                     })
-                    .ToList();  // Convert the result to a list
+                    .ToList();  // Convert the result to a list(deferred execution.)
 
                 // Return the patient list as JSON
                 return Json(patients);

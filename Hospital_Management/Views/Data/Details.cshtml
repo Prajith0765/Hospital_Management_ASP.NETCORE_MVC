@@ -24,7 +24,7 @@
     <!-- PATIENT TABLE -->
     <div class="table-responsive">
         <table class="table table-bordered table-hover align-middle text-center">
-            <thead class="table-dark">
+            <thead class="table-success">
                 <tr>
                     <th>Index</th>
                     <th>ID</th>
@@ -57,6 +57,7 @@
 
 @section Scripts {
     <script src="/js/Patient/patient.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--Pass the Role of User Login to the Js-->
     <script>
         const userRole = '@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value';

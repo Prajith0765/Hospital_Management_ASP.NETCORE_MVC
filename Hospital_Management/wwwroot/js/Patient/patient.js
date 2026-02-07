@@ -165,27 +165,50 @@ function deletePatient(id) {
         window.location.href = '/User_Authentication/AccessDenied';
         return;
     }
-    // Show a confirmation dialog before proceeding with deletion
-    if (!confirm("Are you sure you want to delete this patient?")) return;
-    // Make an AJAX POST request to delete the patient record on the server
-    $.ajax({
-        url: '/Admin/DeletePatient',
-        type: 'POST',
-        data: { id: id },
-        // On success, check the response and refresh the patient data if deletion was successful, or show an alert with the error message
-        success: function (res) {
-            if (res.success) {
-                loadPatients(); // refresh table
-            } else {
-                alert(res.message);
+    // SweetAlert confirmation
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'This patient record will be permanently deleted!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+
+        // If user cancels, stop here
+        if (!result.isConfirmed) return;
+
+        // Make an AJAX POST request to delete the patient record on the server
+        $.ajax({
+            url: '/Admin/DeletePatient',
+            type: 'POST',
+            data: { id: id },
+            // On success, check the response and refresh the patient data if deletion was successful, or show an alert with the error message
+            success: function (res) {
+                if (res.success) {
+
+                    //SUCCESS SweetAlert
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Patient record deleted successfully.",
+                        icon: "success",
+                        draggable: true,
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+
+                    loadPatients(); // refresh table
+                } else {
+                    alert(res.message);
+                }
+            },
+            // On error, display an alert indicating that the deletion failed, and redirect to AccessDenied if the error status is 403 (Forbidden)
+            error: function (xhr) {
+                alert('Delete failed');
+                if (xhr.status === 403) {
+                    window.location.href = '/User_Authentication/AccessDenied';
+                }
             }
-        },
-        // On error, display an alert indicating that the deletion failed, and redirect to AccessDenied if the error status is 403 (Forbidden)
-        error: function (xhr) {
-            alert('Delete failed');
-            if (xhr.status === 403) {
-                window.location.href = '/User_Authentication/AccessDenied';
-            }
-        }
+        });
     });
 }
